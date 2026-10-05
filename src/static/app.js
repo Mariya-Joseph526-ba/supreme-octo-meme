@@ -22,10 +22,6 @@ document.addEventListener("DOMContentLoaded", () => {
         const participants = Array.isArray(details.participants) ? details.participants : [];
         const spotsLeft = details.max_participants - participants.length;
 
-        const participantItems = participants.length
-          ? participants.map((email) => `<li>${email}</li>`).join("")
-          : "<li class='empty'>No participants yet</li>";
-
         activityCard.innerHTML = `
           <div class="activity-header">
             <h4>${name}</h4>
@@ -37,10 +33,37 @@ document.addEventListener("DOMContentLoaded", () => {
           <div class="participants-panel">
             <h5>Participants</h5>
             <ul class="participants-list">
-              ${participantItems}
             </ul>
           </div>
         `;
+
+        const participantList = activityCard.querySelector(".participants-list");
+        if (participants.length) {
+          participants.forEach((email) => {
+            const item = document.createElement("li");
+            item.className = "participant-row";
+
+            const emailLabel = document.createElement("span");
+            emailLabel.textContent = email;
+
+            const removeButton = document.createElement("button");
+            removeButton.type = "button";
+            removeButton.className = "remove-participant";
+            removeButton.textContent = String.fromCodePoint(0x1f5d1);
+            removeButton.dataset.activity = name;
+            removeButton.dataset.email = email;
+            removeButton.setAttribute("aria-label", `Remove ${email} from ${name}`);
+            removeButton.title = `Remove ${email}`;
+
+            item.append(emailLabel, removeButton);
+            participantList.appendChild(item);
+          });
+        } else {
+          const emptyItem = document.createElement("li");
+          emptyItem.className = "empty";
+          emptyItem.textContent = "No participants yet";
+          participantList.appendChild(emptyItem);
+        }
 
         activitiesList.appendChild(activityCard);
 
@@ -94,6 +117,34 @@ document.addEventListener("DOMContentLoaded", () => {
       messageDiv.className = "error";
       messageDiv.classList.remove("hidden");
       console.error("Error signing up:", error);
+    }
+  });
+
+  activitiesList.addEventListener("click", async (event) => {
+    const removeButton = event.target.closest(".remove-participant");
+    if (!removeButton) return;
+
+    removeButton.disabled = true;
+    try {
+      const response = await fetch(
+        `/activities/${encodeURIComponent(removeButton.dataset.activity)}/participants?email=${encodeURIComponent(removeButton.dataset.email)}`,
+        { method: "DELETE" }
+      );
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.detail || "Unable to unregister participant");
+      }
+
+      await fetchActivities();
+      messageDiv.textContent = result.message;
+      messageDiv.className = "success";
+      messageDiv.classList.remove("hidden");
+    } catch (error) {
+      messageDiv.textContent = error.message || "Failed to unregister participant. Please try again.";
+      messageDiv.className = "error";
+      messageDiv.classList.remove("hidden");
+      console.error("Error unregistering participant:", error);
     }
   });
 

@@ -123,28 +123,51 @@ section h3 {
 }
 
 .participants-list li {
-  position: relative;
-  padding-left: 18px;
   color: #475569;
   line-height: 1.5;
 }
 
-.participants-list li::before {
-  content: "•";
-  position: absolute;
-  left: 0;
-  color: #2563eb;
-  font-weight: bold;
+.participants-list .participant-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
 }
 
 .participants-list li.empty {
-  padding-left: 0;
   font-style: italic;
   color: #64748b;
 }
 
-.participants-list li.empty::before {
-  content: ""
+.remove-participant {
+  display: inline-grid;
+  place-items: center;
+  flex: 0 0 32px;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 1px solid #fecaca;
+  border-radius: 6px;
+  background: #fff;
+  color: #b91c1c;
+  font-family: sans-serif;
+  font-size: 17px;
+  line-height: 1;
+}
+
+.remove-participant:hover {
+  background: #fef2f2;
+  border-color: #fca5a5;
+}
+
+.remove-participant:focus-visible {
+  outline: 3px solid #93c5fd;
+  outline-offset: 2px;
+}
+
+.remove-participant:disabled {
+  cursor: wait;
+  opacity: 0.6;
 }
 .activity-header {
   display: flex;
