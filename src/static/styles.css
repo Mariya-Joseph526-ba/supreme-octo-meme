@@ -59,19 +59,166 @@ section h3 {
 
 .activity-card {
   margin-bottom: 15px;
-  padding: 15px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  background-color: #f9f9f9;
+  padding: 18px 16px;
+  border: 1px solid #dfe7f5;
+  border-radius: 12px;
+  background: linear-gradient(180deg, #ffffff 0%, #f8faff 100%);
+  box-shadow: 0 6px 14px rgba(26, 35, 126, 0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.activity-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 18px rgba(26, 35, 126, 0.12);
+}
+
+.activity-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 10px;
 }
 
 .activity-card h4 {
-  margin-bottom: 10px;
-  color: #0066cc;
+  margin: 0;
+  color: #1d4ed8;
+  font-size: 1.15rem;
+}
+
+.availability-pill {
+  background: #e0f2fe;
+  color: #075985;
+  border-radius: 999px;
+  padding: 5px 10px;
+  font-size: 0.8rem;
+  font-weight: 700;
 }
 
 .activity-card p {
   margin-bottom: 8px;
+}
+
+.participants-panel {
+  margin-top: 14px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 10px 12px;
+}
+
+.participants-panel h5 {
+  margin: 0 0 8px;
+  color: #334155;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.participants-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 6px;
+}
+
+.participants-list li {
+  position: relative;
+  padding-left: 18px;
+  color: #475569;
+  line-height: 1.5;
+}
+
+.participants-list li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: #2563eb;
+  font-weight: bold;
+}
+
+.participants-list li.empty {
+  padding-left: 0;
+  font-style: italic;
+  color: #64748b;
+}
+
+.participants-list li.empty::before {
+  content: ""
+}
+.activity-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.activity-card h4 {
+  margin: 0;
+  color: #1d4ed8;
+  font-size: 1.15rem;
+}
+
+.availability-pill {
+  background: #e0f2fe;
+  color: #075985;
+  border-radius: 999px;
+  padding: 5px 10px;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.activity-card p {
+  margin-bottom: 8px;
+}
+
+.participants-panel {
+  margin-top: 14px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 10px 12px;
+}
+
+.participants-panel h5 {
+  margin: 0 0 8px;
+  color: #334155;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.participants-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 6px;
+}
+
+.participants-list li {
+  position: relative;
+  padding-left: 18px;
+  color: #475569;
+  line-height: 1.5;
+}
+
+.participants-list li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: #2563eb;
+  font-weight: bold;
+}
+
+.participants-list li.empty {
+  padding-left: 0;
+  font-style: italic;
+  color: #64748b;
+}
+
+.participants-list li.empty::before {
+  content: "";
 }
 
 .form-group {
